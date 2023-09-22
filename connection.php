@@ -1,6 +1,9 @@
 <?php
 
 require "requires/database.php";
+
+$conn=getDB();
+
 //Check the connections is established or not
 if(!mysqli_connect_error())
     echo "Succesfully connected to database";

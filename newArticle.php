@@ -1,9 +1,12 @@
 <?php require "requires/header.php"; ?>
 
-<?php 
+<?php require "requires/database.php"; ?>
+
+<?php
+
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
-    require "requires/database.php";
+    $conn=getDB();
     // var_dump($_POST);
     $id=mysqli_escape_string($conn,$_POST['ID']); //Avoid sql injection
     $title=mysqli_escape_string($conn,$_POST['TITLE']);

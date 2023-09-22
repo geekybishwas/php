@@ -22,6 +22,7 @@
 
 require "requires/database.php";
 
+$conn=getDB();
 //Creating a sql query
 $sql="SELECT *FROM ARTICLES ORDER BY ID;";
 

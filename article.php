@@ -22,6 +22,8 @@
 
 require "requires/database.php";
 
+$conn=getDB();
+
 if(isset($_GET['ID']) && is_numeric($_GET['ID'])){
     //Creating a sql query
     $sql="SELECT *FROM ARTICLES WHERE ID=".$_GET['ID'];

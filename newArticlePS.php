@@ -1,9 +1,10 @@
-<?php require "requires/header.php"; ?>
+<?php
 
-<?php 
+require "requires/database.php";
+
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
-    require "requires/database.php";
+    $conn=getDB();
     // var_dump($_POST);
     $id=$_POST['ID'];
     $title=$_POST['TITLE'];
@@ -40,6 +41,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 }
 
 ?>
+<?php require "requires/header.php"; ?>
 
 <h1>New Article</h1>
 
