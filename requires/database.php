@@ -1,5 +1,10 @@
 <?php
+/***
+    Get the database connection
 
+    @return object connection to a MYSQL server
+
+***/
 function getDB()
 {
 
