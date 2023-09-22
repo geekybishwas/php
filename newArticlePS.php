@@ -16,8 +16,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     if($title==""){
         $errors[]="Title is required";
     }
+    
     if($content==""){
         $errors[]="Content is required";
+    }
+
+    if($publishedDataTime !="")
+    {
+        //This funtion is used to create a date time formar from the given string ,if it is unable to conevrt it into date , it returns false
+        $date_time=date_create_from_format('Y-m-d H:i:s',$publishedDataTime);
+
+        if($date_time===false)
+        {
+            $errors[]="Invalid data and time";
+        }
     }
     if(empty($errors))
         {
