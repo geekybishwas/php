@@ -55,8 +55,8 @@ else
         <?php else:?>
             <ul>
                         <article>
-                            <h2><?=$article['TITLE'];?></h2>
-                            <p><?=$article['CONTENT'];?></p>
+                            <li><h2><?=$article['TITLE'];?></h2></li>
+                            <li><p><?=$article['CONTENT'];?></p></li>
                         </article>
             </ul>
         <?php endif;?>

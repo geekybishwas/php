@@ -13,6 +13,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     $title=$_POST['TITLE'];
     $content=$_POST['CONTENT'];
     $publishedDataTime=$_POST["PUBLISHED"];
+    
     if($title==""){
         $errors[]="Title is required";
     }
@@ -31,6 +32,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             $errors[]="Invalid data and time";
         }
     }
+
     if(empty($errors))
         {
         $conn=getDB();
@@ -54,7 +56,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             //Execute the preapredStatement using execute Funtion,when we call this function the database server inserts the values into the sql
             // If this function return true, then it works
             if(mysqli_stmt_execute($stmt)){
-                echo "Inserted record with id: $id ";
+                
+                //Redirect to article page
+                header("Location: article.php?ID=$id");
+
+                // echo "Inserted record with id: $id ";
             }
             else
             {

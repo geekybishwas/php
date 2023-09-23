@@ -41,7 +41,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             echo mysqli_error($conn);
         else
         {
-            echo "Inserted record with id: $id ";
+            header("Location :article.php?ID=$ID");
+            exit();
         }
     }
 }
@@ -64,17 +65,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         <input type="number" id="number" name="ID">
     </div>
     <div>
-        <label for="text">Title</label>
-        <input type="text" name='TITLE' placeholder="Article Title" value="<?=$title1;?>">
+        <label for="text">Title</label>  
+        <!--
+        htmlspecialchars funtions is to avoid XSS attack
+        -->
+        <input type="text" name='TITLE' placeholder="Article Title" value="<?=htmlspecialchars($title1);?>">
     </div>
     <div>
         <label for="text">Content</label>
-        <textarea name="CONTENT" id="content" cols="30" rows="10"><?=$content1;?></textarea>
+        <textarea name="CONTENT" id="content" cols="30" rows="10"><?=htmlspecialchars($content1);?></textarea>
     </div>
     <div>
         <label for="date">Date and time of Published Article</label>
         <!-- <input type="datetime-local" name="PUBLISHED" id="date"> -->
-        <input type="text" name="PUBLISHED" id='dateTime' value="<?=$publish;?>">
+        <input type="text" name="PUBLISHED" id='dateTime' value="<?=htmlspecialchars($publish);?>">
     </div>
 
     <input type="submit" value="Submit" name="submit" id="submit">
