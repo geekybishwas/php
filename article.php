@@ -58,6 +58,7 @@ else
                             <li><h2><?=$article['TITLE'];?></h2></li>
                             <li><p><?=$article['CONTENT'];?></p></li>
                         </article>
+                            <a href="editArticle.php?ID=<?=$_GET['ID'];?>">Edit</a>
             </ul>
         <?php endif;?>
 

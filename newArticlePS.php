@@ -7,6 +7,7 @@ $id='';
 $title='';
 $content='';
 $publishedDataTime='';
+// echo $_SERVER['HTTPS'];  //Gives the server name
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
     $id=$_POST['ID'];
@@ -24,12 +25,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
     if($publishedDataTime !="")
     {
-        //This funtion is used to create a date time formar from the given string ,if it is unable to conevrt it into date , it returns false
+        //This funtion is used to create a date time format from the given string ,if it is unable to conevrt it into date , it returns false
         $date_time=date_create_from_format('Y-m-d H:i:s',$publishedDataTime);
 
         if($date_time===false)
         {
             $errors[]="Invalid data and time";
+        }
+        else
+        {
+            $data_errors=date_get_last_errors();
+
+            if($date_errors['warning_count']>0){
+                $errors[]='Invalid date and time';
+            }
         }
     }
 
@@ -50,17 +59,29 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             echo mysqli_error($conn);
         else
         {
+            if($publishedDataTime=="")
+            {
+                $publishedDataTime=null;
+            }
             //Binding
             mysqli_stmt_bind_param($stmt,"isss",$id,$title,$content,$publishedDataTime);
 
-            //Execute the preapredStatement using execute Funtion,when we call this function the database server inserts the values into the sql
+            //Execute the preapredStatement using execute Funtion,when we call this function when the database server inserts the values into the sql
             // If this function return true, then it works
             if(mysqli_stmt_execute($stmt)){
                 
-                //Redirect to article page
+                /*Redirect to article page
                 header("Location: article.php?ID=$id");
-
-                // echo "Inserted record with id: $id ";
+                exit;*/
+                if ((isset($_SERVER['HTTPS'])) && ($_SERVER['HTTPS']!='off')){
+                    $protocol='https';
+                }
+                else
+                {
+                    $protocol='http';
+                }
+                //$_SERVER['HTTP_HOST'] gives the server name
+                header("Location: $protocol://" .$_SERVER['HTTP_HOST']."/article.php?ID=$id");
             }
             else
             {
@@ -74,38 +95,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
 ?>
 <?php require "requires/header.php"; ?>
-
 <h1>New Article</h1>
-
-<?php if(!empty($errors)):?>
-    <ul>
-        <?php foreach ($errors as $error):?>
-            <li><?=$error?></li>
-        <?php endforeach;?>
-    </ul>
-<?php endif ;?>
-
-<form method="post">
-    <div>
-        <label for="number">ID</label>
-        <input type="number" id="number" name="ID">
-    </div>
-    <div>
-        <label for="text">Title</label>
-        <input type="text" name='TITLE' placeholder="Article Title" value="<?=$title;?>">
-    </div>
-    <div>
-        <label for="text">Content</label>
-        <textarea name="CONTENT" id="content" cols="30" rows="10"><?=$content;?></textarea>
-    </div>
-    <div>
-        <label for="date">Date and time of Published Article</label>
-        <!-- <input type="datetime-local" name="PUBLISHED" id="date"> -->
-        <input type="text" name="PUBLISHED" id='dateTime' value="<?=$publishedDataTime;?>">
-    </div>
-
-    <input type="submit" value="Submit" name="submit" id="submit">
-</form>
+<?php require "requires/articleForm.php";?>
 
 
 <?php require "requires/footer.php"; ?>

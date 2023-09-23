@@ -42,6 +42,7 @@ else
 ?>
 
 <?php require "requires/header.php";?>
+    <p><a href="./newArticlePS.php">New Article</p>
     <main>
         <?php if (empty($articles)):?>
             <h2>No articles found.</h2>
