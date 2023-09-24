@@ -33,6 +33,7 @@ if(isset($_GET['ID']) && is_numeric($_GET['ID'])){
     $results=mysqli_query($conn,$sql);
 
 
+
     //Checking
     if($results===false)
         echo mysqli_error($conn);
