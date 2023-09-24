@@ -56,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                     $protocol='http';
                 }
                 //$_SERVER['HTTP_HOST'] gives the server name
-                header("Location: $protocol://" .$_SERVER['HTTP_HOST']."/article.php?ID=$id");
+                header("Location: $protocol://" .$_SERVER['HTTP_HOST'] ."/article.php?ID=$id");
             }
             else
             {

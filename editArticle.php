@@ -80,6 +80,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             {
                 mysqli_stmt_bind_param($stmt,'isss',$id,$title,$content,$publishedDataTime);
 
+                $result=mysqli_stmt_get_result($stmt);
+
+                $article=mysqli_fetch_assoc($result);
+
+                var_dump($article);
+
+                exit;
+
                 if(mysqli_stmt_execute($stmt)){
                 
                     if((isset($_SERVER['HTTPS'])) && $_SERVER['HTTPS']!='off'){

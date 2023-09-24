@@ -32,8 +32,6 @@ if(isset($_GET['ID']) && is_numeric($_GET['ID'])){
     //Sending sql query to database
     $results=mysqli_query($conn,$sql);
 
-
-
     //Checking
     if($results===false)
         echo mysqli_error($conn);
@@ -49,8 +47,7 @@ else
 }
 ?>
 <?php require "requires/header.php";?>
-    <main>
-        
+    <main>    
         <?php if ($article===NULL):?>
             <h2>No articles found.</h2>
         <?php else:?>
